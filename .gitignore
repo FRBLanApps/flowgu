@@ -25,3 +25,5 @@ coverage/
 old.txt
 patch.txt
 apis.json
+nfpm.yaml
+releases/
