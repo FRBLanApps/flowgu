@@ -1,0 +1,21 @@
+pkgbase = flowgu-git
+	pkgdesc = A modern Flutter client for Luogu
+	pkgver = 0.1.0.r0.g0000000
+	pkgrel = 1
+	url = https://github.com/FRBLanApps/flowgu
+	arch = x86_64
+	license = MIT
+	makedepends = git
+	makedepends = flutter
+	makedepends = clang
+	makedepends = cmake
+	makedepends = ninja
+	makedepends = pkgconf
+	depends = gtk3
+	provides = flowgu
+	conflicts = flowgu
+	conflicts = flowgu-bin
+	source = git+https://github.com/FRBLanApps/flowgu.git
+	sha256sums = SKIP
+
+pkgname = flowgu-git

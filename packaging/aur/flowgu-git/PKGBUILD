@@ -1,0 +1,36 @@
+pkgname=flowgu-git
+pkgver=0.1.0.r0.g0000000
+pkgrel=1
+pkgdesc='A modern Flutter client for Luogu'
+arch=('x86_64')
+url='https://github.com/FRBLanApps/flowgu'
+license=('MIT')
+depends=('gtk3')
+makedepends=('git' 'flutter' 'clang' 'cmake' 'ninja' 'pkgconf')
+provides=('flowgu')
+conflicts=('flowgu' 'flowgu-bin')
+source=('git+https://github.com/FRBLanApps/flowgu.git')
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/flowgu"
+  printf '0.1.0.r%s.g%s' "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd "${srcdir}/flowgu"
+  flutter pub get
+  flutter build linux --release
+}
+
+package() {
+  cd "${srcdir}/flowgu"
+
+  install -dm755 "${pkgdir}/opt/flowgu"
+  cp -a build/linux/x64/release/bundle/. "${pkgdir}/opt/flowgu/"
+
+  install -dm755 "${pkgdir}/usr/bin"
+  ln -sf /opt/flowgu/flowgu "${pkgdir}/usr/bin/flowgu"
+
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
